@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include\SFML\Graphics.hpp"
+#include "include\proj_include\GameWindow.hpp"
 
 int main(int argc, char** argv)
 {
