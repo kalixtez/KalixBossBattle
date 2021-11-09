@@ -1,14 +1,15 @@
 #ifndef KALIX_H
 #define KALIX_H
 
-#include "Scene.hpp"
+#include "Entity.hpp"
 
+class Kalix : public Entity
+{
+public:
+  Kalix(unsigned int, unsigned int, unsigned int);
+  int playerInput();
 
-class Kalix : 
-
-
-
-
-
+private:
+}
 
 #endif

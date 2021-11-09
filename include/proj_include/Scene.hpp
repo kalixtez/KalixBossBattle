@@ -16,8 +16,9 @@ class Scene
   private:
     //Camera* m_camera;
     //Level* m_Level;
-    //std::vector<Entity> m_entities*;
-}
+    //std::vector<Entity> m_entities;
 
+    Scene(const Scene&) = delete;
+}
 
 #endif

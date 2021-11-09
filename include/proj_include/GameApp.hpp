@@ -14,18 +14,20 @@ class Game
 
 
   private:
-    int loadAssets();
+    int inputHandler();
+    int windowEventHandler();
+    int loadEntityAssets();
     int loadLevels();
     void Update();
 
-    unsigned int WND_WIDTH, WND_HEIGHT; //Window dimensions
+    const unsigned int WND_WIDTH, WND_HEIGHT; //Window dimensions
     unsigned int DEF_POSX, DEF_POSY; //Window initial position on the screen.
-    const char* AppName = "KLS";
+    const char* m_AppName = "KLS";
 
-    sf::RenderWindow m_GameWindow;
+    sf::RenderWindow* m_GameWindow;
+    sf::Keyboard* m_GameInput;
 
-    Scene m_scene;
-
+    Scene* m_scene;
 }
 
 #endif
