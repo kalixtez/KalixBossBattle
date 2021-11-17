@@ -1,6 +1,9 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "Entity.hpp"
+#include "Kalix.hpp"
+
 class Scene
 {
   public:

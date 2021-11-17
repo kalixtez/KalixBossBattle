@@ -20,15 +20,16 @@ class Entity
     LuaScript m_script;
 
   public:
-    virtual void et_DrawEntity(sf::RenderWindow&, lua_State*);
+    virtual void et_DrawEntity(sf::RenderWindow&);
     virtual void et_Init();
-    virtual void lua_setObject();
+    //virtual void lua_setObject(); Might work, but won't use it.
+    virtual void et_getInitials();
 
     Entity();
     ~Entity();
 }
 
-int GetInitials(lua_State* luaPtr)
+int LUAi_GetInitials(lua_State* luaPtr)
 {
   Entity* ptrEntity = (Entity*) lua_topointer(luaPtr, -1);
   double initial_x, initial_y, health = ptrEntity->et_getInitials();
@@ -38,5 +39,13 @@ int GetInitials(lua_State* luaPtr)
 
   return 3;
 }
+
+int LUAi_DrawEntity(lua_State* luaPtr)
+{
+  Entity* ptrEntity = (Entity*) lua_topointer(luaPtr, -1);
+  ptrEntity->et_DrawEntity();
+  return 0;
+}
+
 
 #endif

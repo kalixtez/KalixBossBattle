@@ -1,0 +1,1 @@
+cl -I include\lua include\proj_include include\SFML -o debug\LastStar /link /LIBPATH \lib lib\lua_lib sfml-graphics.lib sfml-main.lib sfml-system.lib sfml-window.lib

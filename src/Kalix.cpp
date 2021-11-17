@@ -1,9 +1,10 @@
 #include "include\proj_include\Kalix.hpp"
 
 Kalix::Kalix():
-speed_x(2), speed_x(2), health(100)
+speed_x(2), speed_y(2), health(100)
 {
-  m_script.registerFunction("GetInitials", GetInitials);
+  m_script.registerFunction("GetInitials", LUAi_GetInitials);
+  m_script.registerFunction("DrawEntity", LUAi_DrawEntity);
   et_Init();
 
 
@@ -25,7 +26,12 @@ void Kalix::et_Init()
   lua_pcall(m_script.m_luaState, 1, 0, 0);
 }
 
-double Kalix::GetInitials(lua_State* luaPtr)
+double Kalix::et_getInitials(lua_State* luaPtr)
 {
   return speed_x, speed_y, health;
+}
+
+void Kalix::et_DrawEntity(sf::RenderWindow& window)
+{
+
 }
