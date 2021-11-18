@@ -44,8 +44,9 @@ int LUAi_DrawEntity(lua_State* luaPtr)
 {
   Entity* ptrEntity = (Entity*) lua_topointer(luaPtr, -1);
   ptrEntity->et_DrawEntity();
+
+  
   return 0;
 }
-
 
 #endif
