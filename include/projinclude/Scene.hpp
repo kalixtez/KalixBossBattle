@@ -14,14 +14,12 @@ class Scene
 
     int sc_Draw();
     int sc_Update();
-    int sc_Display();
 
   private:
     //Camera* m_camera;
     //Level* m_Level;
-    //std::vector<Entity> m_entities;
+    std::vector<Entity> m_entities;
 
-    Scene(const Scene&) = delete;
-}
+};
 
 #endif

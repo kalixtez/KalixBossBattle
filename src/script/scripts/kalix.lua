@@ -1,36 +1,31 @@
 
-KALIX_X = 0
-KALIX_Y = 0
+KALIX_X = 200
+KALIX_Y = 200
 KALIX_SPEED_X = 3
 KALIX_SPEED_Y = 3
-HEALTH = 0
+HEALTH = 100
 JUMPING = false
+DIRX = 0
+ELAPSEDTIME = 0
 
-function Init(ptr)
-  KALIX_X, KALIX_Y, HEALTH = GetInitials(ptr)
+function Update(DIRX, TIME, JUMPING)
+  KALIX_X = KALIX_X + (DIR * SPEED * TIME)
+  if JUMPING == true then
+    if KALIX_SPEED_Y > 0 then
+      KALIX_Y = KALIX_Y - (KALIX_SPEED_Y * TIME)
+      KALIX_SPEED_Y -= 0.25
+    else
+      KALIX_Y = KALIX_Y - (KALIX_SPEED_Y * TIME)
+      KALIX_SPEED_Y -= 0.25
+      if KALIX_SPEED_Y <= -3
+        JUMPING = false
+      end
+    end
+  end
 end
 
-function HandleInput(ptr)
-  DIRX, JUMPING = GetDirection(ptr)
-  time = GetTime()
-end
-
-function Update(DIRX, DIRY, time)
-
-KALIX_X = KALIX_X + (DIR * SPEED * TIME)
-if JUMPING == true
-
-
-end
-
-
-function Draw(ptr)
-  DrawEntity(KALIX_X, KALIX_Y, ptr)
-
-end
-
-function Main(ptr)
-  HandleInput(ptr)
-  --Here goes the drawing code.
-  Draw(ptr)
+function Main(ptr, time)
+  DIRX, JUMPING = GetStatus(ptr)
+  ELAPSEDTIME = time
+  Update(DIRX, ELAPSEDTIME, JUMPING)
 end

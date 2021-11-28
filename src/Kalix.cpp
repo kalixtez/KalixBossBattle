@@ -1,37 +1,82 @@
-#include "include\proj_include\Kalix.hpp"
+#include "Kalix.hpp"
 
-Kalix::Kalix():
-speed_x(2), speed_y(2), health(100)
+int LUAi_GetEntityStatus(lua_State* luaPtr)
 {
-  m_script.registerFunction("GetInitials", LUAi_GetInitials);
-  m_script.registerFunction("DrawEntity", LUAi_DrawEntity);
-  et_Init();
+  Entity* entity = (Entity*) lua_topointer(luaPtr, -1);
+  int dirX = entity->et_getDirection();
+  bool jumping = entity->et_getJumping();
+  lua_pushnumber(luaPtr, dirX);
+  lua_pushboolean(luaPtr, jumping);
 
-
+  return 2;
 }
 
-/*void Kalix::lua_SetObject()
+Kalix::Kalix():
+m_script("kalix.lua")
+{
+  m_script.registerFunction("GetStatus", LUAi_GetEntityStatus);
+  et_Init();
+}
+
+void Kalix::et_Main(sf::RenderWindow& window, float elapsedTime)
 {
   Kalix* ptr = this;
-  lua_pushlightuserdata(m_script.m_luaState, (void*) ptr); //This might work, but I'd rather to this the other way. (The one impelemented)
-  lua_setglobal(m_script.m_luaState, "ptr");
-}*/
+  et_HandleInput();
+  lua_getglobal(m_script.m_luaState, "Main");
+  lua_pushlightuserdata(m_script.m_luaState, (void*) ptr);
+  lua_pushnumber(m_script.m_luaState, elapsedTime);
+  lua_pcall(m_script.m_luaState, 1, 0, 0);
+  m_Sprite.setPosition(m_CoordX, m_CoordY);
+
+  et_DrawEntity(window);
+}
+
+void Kalix::et_LoadSprites()
+{
+  sf::Texture texture;
+  texture.loadFromFile("assets/kalix_spt/kalix_idle_hair.png");
+  m_spriteSheet.push_back(texture);
+  m_Sprite.setTexture(m_spriteSheet[0]);
+}
 
 void Kalix::et_Init()
 {
-  Kalix* ptr = this;
-
-  lua_getglobal(m_script.m_luaState, "Init");
-  lua_pushlightuserdata(m_script.m_luaState, (void*) ptr);
-  lua_pcall(m_script.m_luaState, 1, 0, 0);
+  m_Speed_x = 2;
+  m_Speed_y = 2;
+  m_Initial_x = 100;
+  m_Initial_y = 200;
+  m_Health = 100;
+  et_LoadSprites();
 }
 
-double Kalix::et_getInitials(lua_State* luaPtr)
+int Kalix::et_getDirection()
 {
-  return speed_x, speed_y, health;
+  return m_DirX;
+}
+
+bool Kalix::et_getJumping()
+{
+  return m_Jumping;
 }
 
 void Kalix::et_DrawEntity(sf::RenderWindow& window)
 {
+  window.draw(m_Sprite);
+}
 
+void Kalix::et_HandleInput()
+{
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+  {
+    m_Jumping = true;
+  }
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+  {
+    m_DirX = -1;
+  }
+  else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+  {
+    m_DirX = 1;
+  }
+  else {m_DirX = 0;}
 }
