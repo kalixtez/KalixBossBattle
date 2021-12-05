@@ -1,9 +1,9 @@
 #include "Script.hpp"
 
-LuaScript::LuaScript()
+LuaScript::LuaScript(const char* script_path)
 {
   m_luaState = luaL_newstate();
-	if(luaL_loadfile(m_luaState, "kalix.lua"))
+	if(luaL_loadfile(m_luaState, script_path))
     std::cout << "Loading of the kalix script failed" << std::endl;
   else
   {

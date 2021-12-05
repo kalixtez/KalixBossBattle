@@ -16,7 +16,7 @@ int LUAi_GetEntityStatus(lua_State* luaPtr)
 }
 
 Kalix::Kalix()
-//m_script("C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\\src\\script\\scripts\\kalix.lua")
+m_script("C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\\src\\script\\scripts\\kalix.lua")
 {
   m_script.registerFunction("GetStatus", LUAi_GetEntityStatus);
   et_Init();
@@ -91,7 +91,6 @@ void Kalix::et_HandleInput()
       {}
     else
       {m_Jumping = true;}
-    std::cout << "This works" << std::endl;
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
   {
