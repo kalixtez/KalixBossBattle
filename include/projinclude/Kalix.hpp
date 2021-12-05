@@ -11,16 +11,12 @@ public:
 
   void et_HandleInput();
   void et_LoadSprites();
-  const char* m_sname = "kalix.lua";
   void et_DrawEntity(sf::RenderWindow&);
   void et_Init();
   void et_Main(sf::RenderWindow&, float);
-  //virtual void lua_setObject(); Might work, but won't use it.
-  int et_getDirection();
-  bool et_getJumping();
 
-private:
-  LuaScript m_script;
+  float et_getDirection();
+  bool et_getJumping();
 
 };
 

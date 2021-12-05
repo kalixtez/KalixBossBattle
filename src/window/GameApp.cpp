@@ -11,10 +11,13 @@ int Game::gameLoop()
   while(m_GameWindow.isOpen())
   {
     windowEventHandler();
+    float elapsed = elapsedTime.asSeconds();
+    m_GameWindow.clear(sf::Color::Black);
+    kalix.et_Main(m_GameWindow, elapsed);
+    m_GameWindow.display();
+    elapsedTime = clock.getElapsedTime();
   }
-  float elapsed = elapsedTime.asSeconds();
-  kalix.et_Main(m_GameWindow, elapsed);
-  elapsedTime = clock.getElapsedTime();
+
   return 0;
 }
 
