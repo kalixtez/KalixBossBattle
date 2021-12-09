@@ -9,6 +9,7 @@ class LuaScript
 
 public:
   LuaScript(const char*);
+  LuaScript(){}
 
   void callFunction(const char*); //Use lightuserdata to pass class pointers to Lua. This is important to know which object is calling back.
   void registerFunction(const char*, lua_CFunction);

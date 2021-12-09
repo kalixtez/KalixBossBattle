@@ -18,6 +18,7 @@ public:
   float et_getDirection();
   bool et_getJumping();
 
+  LuaScript m_script;
 };
 
 #endif

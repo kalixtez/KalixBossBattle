@@ -3,7 +3,7 @@
 Game::Game(unsigned int WDD_width, unsigned int WND_height)
 : WND_WIDTH(WDD_width), WND_HEIGHT(WND_height), m_GameWindow(sf::VideoMode(WND_WIDTH, WND_HEIGHT), m_AppName)
 {
-
+  m_GameWindow.setFramerateLimit(60);
 }
 
 int Game::gameLoop()
