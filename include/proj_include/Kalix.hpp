@@ -9,7 +9,7 @@ class Kalix : public Entity
 public:
   Kalix();
 
-  void et_HandleInput();
+  void et_HandleInput(int);
   void et_LoadSprites();
   void et_DrawEntity(sf::RenderWindow&);
   void et_Init();

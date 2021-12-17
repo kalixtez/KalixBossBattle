@@ -1,9 +1,10 @@
 #include "Kalix.hpp"
 #include <iostream>
+#include <vector>
 
 int LUAi_GetEntityStatus(lua_State* luaPtr)
 {
-  Kalix* entity = (Kalix*) lua_topointer(luaPtr, -1);
+  Entity* entity = (Entity*) lua_topointer(luaPtr, -1);
   lua_settop(luaPtr, 0);
   float dirX = entity->et_getDirection();
   std::cout << "Direction:" << dirX << std::endl;
@@ -24,7 +25,6 @@ m_script("C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\
 
 void Kalix::et_Main(sf::RenderWindow& window, float elapsedTime)
 {
-  et_HandleInput();
 
   lua_getglobal(m_script.m_luaState, "Main");
   lua_pushlightuserdata(m_script.m_luaState, (void*) this);
@@ -39,12 +39,10 @@ void Kalix::et_Main(sf::RenderWindow& window, float elapsedTime)
   lua_pop(m_script.m_luaState, -1);
   lua_pop(m_script.m_luaState, -1);
 
-  std::cout << "Coord X:" << m_CoordX << std::endl;
-  std::cout << "Coord Y:" << m_CoordY << std::endl;
-
   m_Sprite.setPosition(m_CoordX, m_CoordY);
 
   et_DrawEntity(window);
+  m_DirX = 0;
 }
 
 void Kalix::et_LoadSprites()
@@ -53,18 +51,15 @@ void Kalix::et_LoadSprites()
   texture.loadFromFile("C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\\assets\\kalix_spt\\kalix_idle_hair.png");
   m_spriteSheet.push_back(texture);
   m_Sprite.setTexture(m_spriteSheet[0]);
+  m_Sprite.setTextureRect(sf::Rect<int>(0, 0, 32, 32));
 }
 
 void Kalix::et_Init()
 {
-  m_Speed_x = 2;
-  m_Speed_y = 2;
-  m_Initial_x = 200;
-  m_Initial_y = 200;
   m_DirX = 0;
   m_Jumping = false;
-  m_CoordX = m_Initial_x;
-  m_CoordY = m_Initial_y;
+  m_CoordX = 200;
+  m_CoordY = 200;
 
   m_Health = 100;
   et_LoadSprites();
@@ -85,21 +80,21 @@ void Kalix::et_DrawEntity(sf::RenderWindow& window)
   window.draw(m_Sprite);
 }
 
-void Kalix::et_HandleInput()
+void Kalix::et_HandleInput(int keyCode) //Receive keycode from the event handler.
 {
   m_DirX = 0;
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+  if(keyCode == 74)
   {
     if(m_Jumping)
       {}
     else
       {m_Jumping = true;}
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+  if(keyCode == -1)
   {
     m_DirX = -1;
   }
-  else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+  else if(keyCode == 1)
   {
     m_DirX = 1;
   }

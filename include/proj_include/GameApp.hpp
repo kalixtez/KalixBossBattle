@@ -2,6 +2,7 @@
 #define GAME_APP
 
 #include "Scene.hpp"
+#include "EventManager.hpp"
 #include <Graphics.hpp>
 #include <Clock.hpp>
 
@@ -24,6 +25,8 @@ class Game
     sf::Clock clock;
     sf::Time elapsedTime;
     Scene* m_scene;
+
+    EventManager m_EventManager;
 };
 
 #endif

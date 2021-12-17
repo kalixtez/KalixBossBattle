@@ -1,8 +1,7 @@
-
 KALIX_X = 200
 KALIX_Y = 200
-KALIX_SPEED_X = 3
-KALIX_SPEED_Y = 5
+KALIX_SPEED_X = 160
+KALIX_SPEED_Y = 160
 HEALTH = 100
 JUMPING = false
 
@@ -12,14 +11,14 @@ function Update(DIRX, TIME, JUMPING_L)
   if JUMPING == true then
     if KALIX_SPEED_Y >= 0 then
       KALIX_Y = KALIX_Y - (KALIX_SPEED_Y * TIME)
-      KALIX_SPEED_Y = KALIX_SPEED_Y - 0.25
+      KALIX_SPEED_Y = KALIX_SPEED_Y - 6
     else
       KALIX_Y = KALIX_Y - (KALIX_SPEED_Y * TIME)
-      KALIX_SPEED_Y = KALIX_SPEED_Y - 0.25
+      KALIX_SPEED_Y = KALIX_SPEED_Y - 6
     end
-    if KALIX_SPEED_Y <= -3 then
+    if KALIX_SPEED_Y <= -80 then
       JUMPING = false
-      KALIX_SPEED_Y = 5
+      KALIX_SPEED_Y = 160
     end
   end
 end
