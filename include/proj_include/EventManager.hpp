@@ -31,7 +31,7 @@ enum class EventType
 struct EventInfo
 {
   EventInfo(){}
-  EventInfo(int& keyCode)
+  EventInfo(int keyCode)
   {sm_keyCode = keyCode;}
 
   unsigned int sm_keyCode;
@@ -63,6 +63,7 @@ struct Binding
   unsigned int m_eventDetail;
   Callback m_callback;
   unsigned int m_eventCount;
+  bool m_hasDefault = false;
 };
 
 using Bindings = std::unordered_map<std::string, Binding*>; //String to identify the binding with a name, e.g "PlayerMovement".
@@ -70,8 +71,7 @@ using Bindings = std::unordered_map<std::string, Binding*>; //String to identify
 struct EventManager
 {
   EventManager()
-  {
-  }
+  {}
   bool AddBinding(Binding* binding)
   {
     if(m_bindings.find(binding->m_name) == m_bindings.end())

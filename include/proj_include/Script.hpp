@@ -3,15 +3,16 @@
 
 #include <lua.hpp>
 #include <iostream>
+#include "Animation.hpp"
 
 class LuaScript
 {
 
 public:
-  LuaScript(const char*);
+  LuaScript(const char*, void*);
   LuaScript(){}
 
-  void callFunction(const char*); //Use lightuserdata to pass class pointers to Lua. This is important to know which object is calling back.
+ //Use lightuserdata to pass object pointers to Lua. This is important to know which object is calling back.
   void registerFunction(const char*, lua_CFunction);
   lua_State* m_luaState;
 

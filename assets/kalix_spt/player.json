@@ -1,0 +1,32 @@
+{
+		"Animations":
+		[
+			{
+				"Path": "C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\\assets\\kalix_spt\\kalix_jumping_new-Sheet.png",
+				"Name": "Jumping",
+				"Number_of_frames": 10,
+				"Frametime": [60, 60, 60, 60, 60, 60, 60, 300, 100, 100],
+				"HitboxDimensions": [[32, 48]],
+				"Animation_ID": 2
+			},
+
+			{
+				"Path": "C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\\assets\\kalix_spt\\kalix_running_new_hair-Sheet.png",
+				"Name": "Running",
+				"Number_of_frames": 10,
+				"Frametime": 75,
+				"HitboxDimensions": [[32, 48]],
+				"Animation_ID": 1
+			},
+
+			{
+				"Path": "C:\\Users\\OmGIt\\OneDrive\\Escritorio\\C++ practice\\KalixBossBattle\\assets\\kalix_spt\\kalix_combat_pose.png",
+				"Name": "IdleOne",
+				"Number_of_frames": 12,
+				"Frametime": 75,
+				"HitboxDimensions": [[32, 48]],
+				"Animation_ID": 3
+			}
+
+		]
+}

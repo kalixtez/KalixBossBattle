@@ -15,10 +15,16 @@ bool EventManager::LoadBindings(std::string path)
   while(std::getline(bindings_file, line))
   {
     std::string binding_name;
+    std::string has_default;
     std::stringstream s_stream(line);
+
+    s_stream >> has_default;
 
     s_stream >> binding_name;
     Binding* newbind = new Binding(binding_name);
+
+    if(has_default == "D")
+      newbind->m_hasDefault = true;
 
     while(!s_stream.eof())
     {
@@ -84,7 +90,7 @@ void EventManager::HandleInput()
 
     if(bind->m_eventCount == bind->m_events.size()) //This is why: if the event counter is equal to the number of events in the binding, we callback the function bound to the binding.
       { //(The event count being the same as the size of the m_events means that all events that need to happen have happened)
-        bind->m_callback(bind->m_eventDetail); //This is provisional, and will just work for cases where the bind is bound to only one event.
+        bind->m_callback(bind->m_eventDetail); //Call the function wrapper with the event detail as the parameter.
       }
 
     bind->m_eventCount = 0;

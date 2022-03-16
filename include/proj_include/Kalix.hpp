@@ -10,7 +10,6 @@ public:
   Kalix();
 
   void et_HandleInput(int);
-  void et_LoadSprites();
   void et_DrawEntity(sf::RenderWindow&);
   void et_Init();
   void et_Main(sf::RenderWindow&, float);

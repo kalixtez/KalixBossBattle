@@ -14,7 +14,7 @@ class Game
     int gameLoop();
 
   private:
-    int windowEventHandler();
+    void windowEventHandler();
 
     const unsigned int WND_WIDTH, WND_HEIGHT; //Window dimensions
     unsigned int DEF_POSX, DEF_POSY; //Window initial position on the screen.

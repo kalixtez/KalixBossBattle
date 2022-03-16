@@ -29,15 +29,12 @@ int Game::gameLoop()
   return 0;
 }
 
-int Game::windowEventHandler()
+void Game::windowEventHandler()
 {
   sf::Event win_event;
   while(m_GameWindow.pollEvent(win_event))
   {
     if (win_event.type == sf::Event::Closed)
-      {
-        m_GameWindow.close();
-      }
+      { m_GameWindow.close(); }
   }
-  return 0;
 }
