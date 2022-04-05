@@ -5,6 +5,7 @@
 static const struct luaL_Reg animlib_reg[] =
 {
  //{ "play", LUAi_PlayCurrentAnim },
+ // { "reset", LUAi_ResetPastAnim },
  { "frametime", LUAi_GetFrametime },
  { "next_frame", LUAi_NextFrame },
  {NULL, NULL}
@@ -69,7 +70,7 @@ void Animation::EntityLoadAnimations(lua_State* luaptr, const std::string& path)
 
 }
 
-//This function will be registered as a global in Lua.
+//This function will be registered as a global in Lua.  Loads the animations' descriptions from a json, uses them to create UniqueAnimation objects that have the AnimationMetatable associated with them.
 int LUAi_AddAnimations(lua_State* luaPtr)    //This function will be called from Lua, to load all of the animations into a state that's associated with an entity.
 {
   Entity* entity = (Entity*) lua_topointer(luaPtr, -2);
@@ -89,7 +90,28 @@ int LUAi_GetCurrentAnimation(lua_State* luaPtr)
   return 1;
 }
 
-int LUAi_NextFrame(lua_State* luaPtr)
+int LUAi_ResetPastAnim(lua_State* luaPtr)
+{
+  UniqueAnimation* anim = (UniqueAnimation*) lua_touserdata(luaPtr, -1);
+  anim->m_FirstTime = true;
+  anim->m_AnimationTime = 0.0;
+  anim->m_currentFrame = 0;
+
+  return 0;
+}
+
+int LUAi_PlayCurrentAnim(lua_State* luaPtr)
+{
+  UniqueAnimation* anim = (UniqueAnimation*) lua_touserdata(luaPtr, -2);
+  Entity* entity = (Entity*) lua_topointer(luaPtr, -1);
+
+  entity->m_entityAnim.m_CurrentAnimation = anim;
+  //entity->m_entityAnim.m_CurrentAnimationName = anim->m_Name;
+
+  return 0;
+}
+
+int LUAi_NextFrame(lua_State* luaPtr) //This function advances the frame of the current animation.
 {
   UniqueAnimation* anim = (UniqueAnimation*) lua_touserdata(luaPtr, -1);
   anim->m_currentFrame++;
@@ -97,7 +119,7 @@ int LUAi_NextFrame(lua_State* luaPtr)
   return 0;
 }
 
-int LUAi_GetFrametime(lua_State* luaPtr)
+int LUAi_GetFrametime(lua_State* luaPtr) //This function returns the duration of the current frame of the current animation.
 {
   UniqueAnimation* anim = (UniqueAnimation*) lua_touserdata(luaPtr, -1);
   lua_pushnumber(luaPtr, anim->m_FrameTimes[anim->m_currentFrame]);

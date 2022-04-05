@@ -35,15 +35,16 @@ void Kalix::et_Main(sf::RenderWindow& window, float elapsedTime)
   //std::cout << animID << '\n';
   //std::cout << elapsedlua << '\n';
 
-  if(m_Jumping == false && m_DirX == 0)
+  /*if(m_Jumping == false && m_DirX == 0)
     {
       if(m_entityAnim.m_CurrentAnimation != m_entityAnim.m_Animations.find("IdleOne")->second)
       {
+        m_entityAnim.m_CurrentAnimation->m_FirstTime = true;
         m_entityAnim.m_CurrentAnimationName = m_entityAnim.m_Animations.find("IdleOne")->first.c_str();
         m_entityAnim.m_CurrentAnimation = m_entityAnim.m_Animations.find("IdleOne")->second;
-        m_entityAnim.m_CurrentAnimation->m_currentFrame = 0;
       }
     }
+    */
 
   m_DirX = 0;
   et_DrawEntity(window);
@@ -87,29 +88,35 @@ void Kalix::et_HandleInput(int keyCode) //Receive keycode from the event handler
       {
         m_Jumping = true;
       }
+      /*
+      m_entityAnim.m_CurrentAnimation->m_FirstTime = true;
       m_entityAnim.m_CurrentAnimationName = m_entityAnim.m_Animations.find("Jumping")->first.c_str();
       m_entityAnim.m_CurrentAnimation = m_entityAnim.m_Animations.find("Jumping")->second;
-      m_entityAnim.m_CurrentAnimation->m_currentFrame = 0;
+      */
   }
   if(keyCode == -1)
   {
     m_DirX = -1;
+  /*
     if(m_entityAnim.m_CurrentAnimation != m_entityAnim.m_Animations.find("Running")->second)
     {
+      m_entityAnim.m_CurrentAnimation->m_FirstTime = true;
       m_entityAnim.m_CurrentAnimationName = m_entityAnim.m_Animations.find("Running")->first.c_str();
       m_entityAnim.m_CurrentAnimation = m_entityAnim.m_Animations.find("Running")->second;
-      m_entityAnim.m_CurrentAnimation->m_currentFrame = 0;
     }
+    */
   }
   else if(keyCode == 1)
   {
     m_DirX = 1;
+/*
     if(m_entityAnim.m_CurrentAnimation != m_entityAnim.m_Animations.find("Running")->second)
     {
+      m_entityAnim.m_CurrentAnimation->m_FirstTime = true;
       m_entityAnim.m_CurrentAnimationName = m_entityAnim.m_Animations.find("Running")->first.c_str();
       m_entityAnim.m_CurrentAnimation = m_entityAnim.m_Animations.find("Running")->second;
-      m_entityAnim.m_CurrentAnimation->m_currentFrame = 0;
     }
+    */
   }
 
 }
